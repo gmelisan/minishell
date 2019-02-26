@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 05:58:45 by gmelisan          #+#    #+#              #
-#    Updated: 2019/02/26 02:54:35 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/02/26 06:54:12 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,16 +14,16 @@ NAME = minishell
 
 LIBFT = ./libft
 
-CC = clang
-CFLAGS = -g
+CC = @clang
+CFLAGS = -Wall -Wextra -g
 
 OBJ = $(addprefix ./src/, \
-main.o error.o main_loop.o parse_line.o exec_line.o)
+main.o error.o main_loop.o tokenize.o exec_line.o get_command.o)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT)/libft.a $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT)-lft
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT) -lft
 	@echo "\033[0;32mFile $@ was successfully created.\033[0m"
 
 $(OBJ): ./include/minishell.h
