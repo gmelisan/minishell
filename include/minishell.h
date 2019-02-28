@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:07:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/26 06:48:28 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:01:40 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,23 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "libft.h"
+# include "ft_string.h"
 
 # define STDIN			0
 # define STDOUT			1
 # define STDERR			2
 
-# define PATH_MAX		256
+# define ERROR_MALLOC	1
+# define ERROR_GNL		2
+# define ERROR_BADSYN	3
+
 # define SHELL_NAME		"minishell"
 
-enum e_toktype
-{
-	NONE,
-	WORD,
-	SEMICOLON
-};
-
-typedef struct		s_token
-{
-	enum e_toktype	type;
-	char			*s;
-}					t_token;
-
-typedef	struct		s_command
-{
-	char			**argv;
-	t_token			next_token;
-}					t_command;
-
-void				error_nofile(char *file);
-void				error(char *str);
-void				error_syntax(char *str);
-int					main_loop(int fd);
-t_list				*tokenize(char *line);
-void				deltok(void *token, size_t size);
-t_command			*get_command(t_list **toklist);
-int					exec_line(t_list *toklist);
+void	error_nofile(char *file);
+void	print_error(char *str);
+void	error_syntax(char *str);
+int		main_loop(int fd);
+int		get_argv(t_string line, char ***p_argv);
+int		exec_line(t_string line);
 
 #endif

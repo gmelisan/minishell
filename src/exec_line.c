@@ -6,35 +6,35 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 07:21:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/26 07:05:16 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:03:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_command(t_command c)
+void	print(char **a)
 {
 	int i;
 
 	i = 0;
-	while (c.argv[i])
+	while (a[i])
 	{
-		ft_printf("argv[%d] = %s\n", i, c.argv[i]);
+		ft_printf("[%s]\n", a[i]);
 		i++;
 	}
-	ft_printf("\n");
 }
 
-int		exec_line(t_list *toklist)
+int		exec_line(t_string line)
 {
-	t_command *command;
+	int		ret;
+	char	**argv;
 
-	while (((t_token *)toklist->content)->type)
+	while ((ret = get_argv(line, &argv)))
 	{
-		command = get_command(&toklist);
-		if (!command)
-			error("Parsing error");
-		check_command(*command);
+		if (ret)
+			error(ret);
+		print(argv);
+		ft_strarrdel(&argv);
 	}
 	return (0);
 }

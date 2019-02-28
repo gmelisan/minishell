@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:50:08 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/25 07:23:50 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:03:07 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,18 @@ void	error_nofile(char *file)
 	exit(1);
 }
 
-void	error(char *str)
+void	print_error(int e)
 {
-	ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, str);
+	if (!e)
+		return ;
+	if (e == ERROR_MALLOC)
+		ft_fdprintf(STDERR, "%s: %s\n",	SHELL_NAME,
+										"Error while allocating memory");
+	else if (e == ERROR_GNL)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Input reading error");
+	else if (e == ERROR_BADSYN)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Syntax error");
+	else
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Unknown error");
 }
+n
