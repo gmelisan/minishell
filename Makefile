@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 05:58:45 by gmelisan          #+#    #+#              #
-#    Updated: 2019/02/28 16:36:09 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/01 14:06:56 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ CC = @clang
 CFLAGS = -Wall -Wextra -g
 
 OBJ = $(addprefix ./src/, \
-main.o error.o main_loop.o exec_line.o get_argv.o)
+main.o print_error.o main_loop.o exec_line.o get_argv.o)
 
 all: $(NAME)
 

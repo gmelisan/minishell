@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:07:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/28 18:01:40 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:06:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 # define SHELL_NAME		"minishell"
 
 void	error_nofile(char *file);
-void	print_error(char *str);
+void	print_error(int	e);
 void	error_syntax(char *str);
 int		main_loop(int fd);
-int		get_argv(t_string line, char ***p_argv);
 int		exec_line(t_string line);
+int		get_argv(t_string line, char ***p_argv);
 
 #endif

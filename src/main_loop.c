@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:51:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/28 18:35:58 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:03:04 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int		main_loop(int fd)
 			ft_printf("$> ");
 		ret = get_next_line(fd, &line.s);
 		if (ret == -1)
-			error(ERROR_GNL);
+		{
+			print_error(ERROR_GNL);
+			continue ;
+		}
 		else if (ret == 0)
 			break;
 		str_fixlen(&line);

@@ -6,7 +6,7 @@
 #    By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 12:48:23 by gmelisan          #+#    #+#              #
-#    Updated: 2019/02/28 17:37:11 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/01 18:06:52 by gmelisan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ number_to_string_f.o number_to_string_e.o \
 get_color.o handle_color.o ))
 
 OBJ_FTSTRING = $(sort $(addprefix ./src/ft_string/, \
-str_create.o str_copy.o str_concat.o str_delete.o str_delete.o \
-str_fixlen.o str_get.o str_compare.o str_duplicate.o str_resize.o \
-str_substring.o))
+str_create.o str_copy.o str_delete.o str_delete.o \
+str_fixlen.o str_get.o str_compare.o str_duplicate.o \
+str_substring.o str_addfront.o str_addback.o str_split.o))
 
 all: $(NAME)
 

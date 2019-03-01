@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:40:30 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/22 22:46:02 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/01 15:07:15 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void		str_delete(t_string *str)
 {
-	if (str->len >= 0)
+	if (str->allocated > 0)
 		ft_strdel(&str->s);
-	str->len = -1;
+	str->len = 0;
+	str->allocated = 0;
 }

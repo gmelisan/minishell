@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_line.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 18:18:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/28 18:35:58 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/01 17:08:16 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/01 18:10:06 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_string.h"
 
-int		tokenize(t_string line, t_list **toklist)
+int		main(void)
 {
-	int		i;
-	t_token tok;
+	t_string str;
+	t_string *tab;
 
-	while (str_get(line, i))
+	str = str_copy("hello	darkness		 my    old friend    ");
+	tab = str_split(str, ft_isspace);
+	int i = 0;
+	while (tab[i].s)
 	{
-		if (ft_isalnum(str_get(line, i)))
-			addword(
+		ft_printf("%s\n", tab[i].s);
+		str_delete(&tab[i]);
 		i++;
 	}
-}
-
-int		parse_line(t_string line, t_list cmdlist)
-{
-	t_list *toklist;
-
-	
+	free(tab);
+	str_delete(&str);
+	return (0);
 }
