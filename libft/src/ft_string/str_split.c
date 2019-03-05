@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:07:00 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/01 18:07:36 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:22:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_string	*str_split(t_string str, int (*isdelim)(int))
 			break ;
 		while (str_get(str, i) && !isdelim(str_get(str, i)))
 		{
-			str_addback(&res[j], &str.s[i], 1);
+			if (str_addback(&res[j], &str.s[i], 1) == NULL)
+				return (NULL);
 			i++;
 		}
 		j++;

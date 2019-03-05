@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:23:18 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/01 18:06:29 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:17:03 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int				str_compare(t_string str1, t_string str2);
 
 t_string		*str_split(t_string str, int (*isdelim)(int));
 
-int				str_addback(t_string *str, char *s, size_t size);
-int				str_addfront(t_string *str, char *s, size_t size);
+t_string		*str_addback(t_string *str, char *s, size_t size);
+t_string		*str_addfront(t_string *str, char *s, size_t size);
 
 #endif

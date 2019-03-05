@@ -6,27 +6,27 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 16:07:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/01 17:49:45 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:14:05 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_string.h"
 
-static int	create(t_string *str, char *s, size_t size)
+static t_string	*create(t_string *str, char *s, size_t size)
 {
 	*str = str_create(size);
 	if (!str->allocated)
-		return (0);
+		return (NULL);
 	ft_memcpy(str->s, s, size);
-	return (1);
+	return (str);
 }
 
-int			str_addback(t_string *str, char *s, size_t size)
+t_string		*str_addback(t_string *str, char *s, size_t size)
 {
 	size_t	newalloc;
 
 	if (!size || !str)
-		return (0);
+		return (NULL);
 	if (!str->allocated)
 		return (create(str, s, size));
 	if (str->len + size >= str->allocated)
@@ -35,10 +35,10 @@ int			str_addback(t_string *str, char *s, size_t size)
 		while (str->len + size >= newalloc)
 			newalloc *= 2;
 		if (!ft_realloc((void **)&str->s, str->len, newalloc))
-			return (0);
+			return (NULL);
 		str->allocated = newalloc;
 	}
 	ft_memcpy(str->s + str->len, s, size);
 	str->len += size;
-	return (1);
+	return (str);
 }

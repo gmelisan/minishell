@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:47:32 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/11 05:49:42 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:14:02 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ static void	ft_lstremove(t_list **list, t_list *item)
 	if (i == item)
 	{
 		*list = (*list)->next;
+		free(i->content);
 		free(i);
 		return ;
 	}

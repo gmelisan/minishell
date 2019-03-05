@@ -6,14 +6,14 @@
 #    By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 12:48:23 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/01 18:06:52 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/04 13:54:52 by gmelisan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(sort $(addprefix ./src/, \
 ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \

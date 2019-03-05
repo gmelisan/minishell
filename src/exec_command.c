@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 06:51:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/04 16:07:34 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/04 15:20:35 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/04 16:17:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main_loop(int fd)
+int		exec_command(char **argv, char **envp)
 {
-	t_string	line;
-	int			ret;
+	pid_t	pid;
+	int		status;
 
-	while (1)
+	pid = fork();
+	if (pid == 0)
 	{
-		if (fd == STDIN)
-			ft_printf("$> ");
-		if ((ret = get_next_line(fd, &line.s)) == -1)
-		{
-			print_error(ERROR_GNL);
-			continue ;
-		}
-		else if (ret == 0)
-			break;
-		str_fixlen(&line);
-		if ((ret = exec_line(line)) != 0)
-			print_error(ret);
-		str_delete(&line);
+		if (execve(argv[0], argv, envp) == -1)
+			return (ERROR_EXEC);
 	}
-	if (fd == STDIN)
-		ft_printf("\n");
+	else if (pid < 0)
+		return (ERROR_FORK);
+	else
+	{
+		while (1)
+		{
+			if (waitpid(pid, &status, WUNTRACED) == -1)
+				return (ERROR_WAIT);
+			if (WIFEXITED(status) || WIFSIGNALED(status))
+				break ;
+		}
+	}
 	return (0);
 }
