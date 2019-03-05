@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:23:18 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/04 13:17:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/05 17:10:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_string		str_copy(char *s);
 t_string		str_substring(t_string str, int start, int len);
 
 void			str_delete(t_string *str);
+void			str_delarr(t_string **str);
 
 int				str_fixlen(t_string *str);
 char			str_get(t_string str, int i);

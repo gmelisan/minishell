@@ -6,14 +6,14 @@
 #    By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 12:48:23 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/04 13:54:52 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/05 17:12:55 by gmelisan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ = $(sort $(addprefix ./src/, \
 ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
@@ -48,7 +48,8 @@ get_color.o handle_color.o ))
 OBJ_FTSTRING = $(sort $(addprefix ./src/ft_string/, \
 str_create.o str_copy.o str_delete.o str_delete.o \
 str_fixlen.o str_get.o str_compare.o str_duplicate.o \
-str_substring.o str_addfront.o str_addback.o str_split.o))
+str_substring.o str_addfront.o str_addback.o str_split.o \
+str_delarr.o))
 
 all: $(NAME)
 

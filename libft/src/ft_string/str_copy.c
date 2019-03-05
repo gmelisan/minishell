@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:36:00 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/01 17:15:32 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/05 17:18:24 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_string		str_copy(char *s)
 	if (!s)
 		return (str);
 	str = str_create(ft_strlen(s));
+	if (!str.s)
+		return (str);
 	ft_memcpy(str.s, s, str.len);
 	return (str);
 }

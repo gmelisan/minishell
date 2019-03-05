@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 15:20:35 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 18:06:57 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/05 16:55:11 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/05 17:25:15 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exec_command(char **argv, char **envp)
+int		get_env(t_string **ps_env)
 {
-	pid_t	pid;
-	int		status;
+	extern char	**environ;
+	int			i;
 
-	pid = fork();
-	if (pid == 0)
+	i = 0;
+	while (environ[i])
+		i++;
+	*ps_env = ft_memalloc(sizeof(t_string) * (i + 1));
+	if (!*ps_env)
+		return (ERROR_MALLOC);
+	i = 0;
+	while (environ[i])
 	{
-		if (execve(argv[0], argv, envp) == -1)
-			return (ERROR_EXEC);
-	}
-	else if (pid < 0)
-		return (ERROR_FORK);
-	else
-	{
-		while (1)
-		{
-			if (waitpid(pid, &status, WUNTRACED) == -1)
-				return (ERROR_WAIT);
-			if (WIFEXITED(status) || WIFSIGNALED(status))
-				break ;
-		}
+		(*ps_env)[i] = str_copy(environ[i]);
+		if (!(*ps_env)[i].s)
+			return (ERROR_MALLOC);
+		i++;
 	}
 	return (0);
 }

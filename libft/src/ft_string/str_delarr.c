@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_delarr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 03:08:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 17:24:50 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/05 17:10:04 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/05 17:12:39 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_string.h"
 
-int		main(int argc, char **argv)
+void	str_delarr(t_string **strarr)
 {
-	int			fd;
-	t_string	*s_env;
-	int			ret;
+	int i;
 
-	fd = STDIN;
-	if (argc > 1)
-		if ((fd = open(argv[1], O_RDONLY)) == -1)
-			error_nofile(argv[1]);
-	if ((ret = get_env(&s_env)))
-		print_error(ret);
-	else
-		ret = main_loop(fd, s_env);
-	str_delarr(&s_env);
-	return (ret);
+	i = 0;
+	while ((*strarr)[i].s)
+		str_delete(&(*strarr)[i++]);
+	free(*strarr);
+	*strarr = NULL;
 }
