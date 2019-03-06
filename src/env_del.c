@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_getval.c                                       :+:      :+:    :+:   */
+/*   env_del.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/05 19:55:52 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 20:47:25 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/06 19:30:47 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/06 19:51:22 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,34 @@ static int	convert(char *name, t_string *p_name)
 	return (0);
 }
 
-int			env_getval(t_string *s_env, char *name, t_string *value)
+static int	delete(t_string **ps_env, int i)
+{
+	int n;
+
+	n = 0;
+	while ((*ps_env)[n].s)
+		n++;
+	str_delete(*ps_env + i);
+	while (++i < n)
+		(*ps_env)[i - 1] = (*ps_env)[i];
+	ft_bzero(*ps_env + i - 1, sizeof(t_string));
+	return (0);
+}
+
+int			env_del(t_string **ps_env, char *name)
 {
 	int			i;
-	char		*startval;
 	t_string	s_name;
 
-	startval = NULL;
 	i = 0;
 	if (convert(name, &s_name))
 		return (ERROR_MALLOC);
-	while (s_env[i].s)
+	while ((*ps_env)[i].s)
 	{
-		if (ft_strncmp(s_env[i].s, s_name.s, s_name.len) == 0)
-			startval = &s_env[i].s[s_name.len];
+		if (ft_strncmp((*ps_env)[i].s, s_name.s, s_name.len) == 0)
+			delete(ps_env, i);
 		i++;
 	}
 	str_delete(&s_name);
-	if (startval)
-	{
-		*value = str_copy(startval);
-		return ((*value).s ? 0 : ERROR_MALLOC);
-	}
-	ft_bzero(value, sizeof(t_string));
 	return (0);
 }

@@ -6,54 +6,55 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:31:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 21:18:17 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/06 21:22:42 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_nofile(char *file)
+void			error_nofile(char *file)
 {
 	ft_fdprintf(STDERR, "%s: Cannot open '%s'\n", SHELL_NAME, file);
 	exit(1);
 }
 
-t_string	create_message(int e)
+static void		print_error2(int e)
 {
-	t_string str;
-
-	if (e == ERROR_MALLOC)
-		str = str_copy("Error while allocating memory");
-	else if (e == ERROR_GNL)
-		str = str_copy("Input reading error");
-	else if (e == ERROR_BADSYN)
-		str = str_copy("Syntax error");
-	else if (e == ERROR_EXEC)
-		str = str_copy("Executing error");
-	else if (e == ERROR_FORK)
-		str = str_copy("Forking error");
-	else if (e == ERROR_WAIT)
-		str = str_copy("Waiting error");
-	else if (e == ERROR_CD)
-		str = str_copy("Changing directory error");
-	else if (e == ERROR_PWD)
-		str = str_copy("Error while printing working directory");
+	if (e == ERROR_CD)
+		ft_fdprintf(STDERR, "%s\n", "Changing directory error");
 	else if (e == ERROR_NODIR)
-		str = str_copy("No such file or directory");
+		ft_fdprintf(STDERR, "%s\n", "No such file or directory");
 	else if (e == ERROR_CDFILE)
-		str = str_copy("Not a directory");
+		ft_fdprintf(STDERR, "%s\n", "Not a directory");
+	else if (e == ERROR_SETENVDIGIT)
+		ft_fdprintf(STDERR, "setenv: %s\n",
+					"Variable name must begin with a letter");
+	else if (e == ERROR_SETENVALNUM)
+		ft_fdprintf(STDERR, "setenv: %s\n",
+					"Variable name must contain alphanumeric characters");
 	else
-		str = str_copy("Unknown error");
-	return (str);
+		ft_fdprintf(STDERR, "%s: Unknown error, code = %d\n", SHELL_NAME, e);
 }
 
-void	print_error(int e)
+void			print_error(int e)
 {
-	t_string str;
-
 	if (!e)
 		return ;
-	str = create_message(e);
-	ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, str.s);
-	str_delete(&str);
+	if (e == ERROR_MALLOC)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Allocating memory error");
+	else if (e == ERROR_GNL)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Input reading errror");
+	else if (e == ERROR_BADSYN)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Syntax error");
+	else if (e == ERROR_EXEC)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Executing error");
+	else if (e == ERROR_FORK)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Forking error");
+	else if (e == ERROR_WAIT)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Waiting error");
+	else if (e == ERROR_PWD)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME,
+					"Error while printing working directory");
+	else
+		print_error2(e);
 }

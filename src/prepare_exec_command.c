@@ -6,13 +6,13 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 17:49:41 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 17:52:24 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/06 21:24:50 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int convert(t_string *s_argv, char ***p_argv)
+static int	convert(t_string *s_argv, char ***p_argv)
 {
 	int		i;
 	char	**argv;
@@ -36,8 +36,8 @@ static int convert(t_string *s_argv, char ***p_argv)
 	return (0);
 }
 
-int		prepare_exec_command(t_string *s_argv, t_string *s_env,
-							 char ***p_argv, char ***p_envp)
+int			prepare_exec_command(t_string *s_argv, t_string *s_env,
+										char ***p_argv, char ***p_envp)
 {
 	convert(s_argv, p_argv);
 	convert(s_env, p_envp);

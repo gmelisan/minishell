@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 03:08:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 17:24:50 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/06 21:18:41 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	if ((ret = get_env(&s_env)))
 		print_error(ret);
 	else
-		ret = main_loop(fd, s_env);
+		ret = main_loop(fd, &s_env);
 	str_delarr(&s_env);
 	return (ret);
 }

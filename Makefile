@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 05:58:45 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/05 20:51:44 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/06 19:33:58 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -g
 OBJ = $(addprefix ./src/, \
 main.o print_error.o main_loop.o exec_line.o get_argv.o exec_command.o \
 exec_builtin.o check_builtin.o prepare_exec_command.o get_env.o \
-check_command.o env_getval.o)
+check_command.o env_getval.o env_setval.o env_del.o)
 
 OBJ += $(addprefix ./src/builtin/, \
 builtin_cd.o builtin_exit.o builtin_pwd.o builtin_env.o builtin_setenv.o \
