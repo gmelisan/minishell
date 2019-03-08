@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare_exec_command.c                             :+:      :+:    :+:   */
+/*   exec_command_wrapper.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/05 17:49:41 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 21:24:50 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/08 19:16:03 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/08 19:30:57 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	exec_command(char **argv, char **envp)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(argv[0], argv, envp) == -1)
+			return (ERROR_EXEC);
+	}
+	else if (pid < 0)
+		return (ERROR_FORK);
+	else
+	{
+		while (1)
+		{
+			if (waitpid(pid, &status, WUNTRACED) == -1)
+				return (ERROR_WAIT);
+			if (WIFEXITED(status) || WIFSIGNALED(status))
+				break ;
+		}
+	}
+	return (0);
+}
 
 static int	convert(t_string *s_argv, char ***p_argv)
 {
@@ -36,10 +62,18 @@ static int	convert(t_string *s_argv, char ***p_argv)
 	return (0);
 }
 
-int			prepare_exec_command(t_string *s_argv, t_string *s_env,
-										char ***p_argv, char ***p_envp)
+int			exec_command_wrapper(t_string *s_argv, t_string *s_env)
 {
-	convert(s_argv, p_argv);
-	convert(s_env, p_envp);
-	return (0);
+	int		ret;
+	char	**argv;
+	char	**envp;
+
+	if ((ret = convert(s_argv, &argv)))
+		return (ret);
+	if ((ret = convert(s_env, &envp)))
+		return (ret);
+	ret = exec_command(argv, envp);
+	ft_strarrdel(&argv);
+	ft_strarrdel(&envp);
+	return (ret);
 }

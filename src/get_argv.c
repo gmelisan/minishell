@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:38:13 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/08 02:41:55 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/08 19:36:43 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int increase(t_string **ps_argv, int *size)
 	*size = newsize;
 	return (0);
 }
-
+*/
 int			get_argv(t_string line, t_string **ps_argv)
 {
 	t_string	*s_argv;
@@ -49,8 +49,7 @@ int			get_argv(t_string line, t_string **ps_argv)
 	return (0);
 }
 
-*/
-
+/*
 int			get_argv(t_string line, t_string **ps_argv)
 {
 	t_string	*s_argv;
@@ -61,14 +60,4 @@ int			get_argv(t_string line, t_string **ps_argv)
 	*ps_argv = s_argv;
 	return (0);
 }
-
-
-/*
-
-
-echo 
-"  hello world " "abcd "
-
-
-
 */

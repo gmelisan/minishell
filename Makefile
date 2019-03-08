@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 05:58:45 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/07 22:00:39 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/08 19:31:35 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,11 +15,11 @@ NAME = minishell
 LIBFT = ./libft
 
 CC = @clang
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(addprefix ./src/, \
-main.o print_error.o main_loop.o exec_line.o get_argv.o exec_command.o \
-exec_builtin.o check_builtin.o prepare_exec_command.o get_env.o \
+main.o print_error.o main_loop.o exec_line.o exec_command_wrapper.o \
+exec_builtin.o check_builtin.o get_env.o get_argv.o \
 check_command.o env_getval.o env_setval.o env_del.o is_dir.o split_path.o)
 
 OBJ += $(addprefix ./src/builtin/, \

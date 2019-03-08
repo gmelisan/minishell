@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:23:18 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/05 17:10:19 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/08 17:01:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_string
 {
 	char		*s;
 	size_t		len;
-	size_t		allocated;
+	size_t		alloc;
 }				t_string;
 
 t_string		str_create(size_t len);
