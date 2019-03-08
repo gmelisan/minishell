@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 16:49:22 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/04 13:16:31 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/07 19:10:07 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_string		*str_addfront(t_string *str, char *s, size_t size)
 {
 	size_t	newalloc;
 
-	if (!size || !str)
-		return (NULL);
+	if (!str || !s || !size)
+		return (str);
 	if (!str->allocated)
 		return (create(str, s, size));
 	if (str->len + size >= str->allocated)

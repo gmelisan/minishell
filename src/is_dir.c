@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   is_dir.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 19:46:20 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/07 17:32:46 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/07 20:10:15 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/07 20:10:36 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int		is_dir(struct stat st)
 {
-	size_t	i;
-
-	if (!s1 || !s2)
-		return (s1 == s2 ? 1 : 0);
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] != s2[i])
-		return (0);
-	return (1);
+	if ((st.st_mode & S_IFMT) == S_IFDIR)
+		return (1);
+	return (0);
 }

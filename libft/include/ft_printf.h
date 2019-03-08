@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/02/27 10:40:26 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/04 12:18:10 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <unistd.h>
 # include <wchar.h>
 # include "libft.h"
+
+# define intmax_t		__intmax_t
+# define uintmax_t		__uintmax_t
 
 # define USE_COLORS		1
 

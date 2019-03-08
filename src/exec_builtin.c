@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:55:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 20:39:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/07 21:57:24 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ int		exec_builtin(t_string *s_argv, t_string **ps_env, int *exit_flag)
 		return (builtin_setenv(s_argv, ps_env));
 	else if (ft_strequ(s_argv[0].s, "unsetenv"))
 		return (builtin_unsetenv(s_argv, ps_env));
+	else if (ft_strequ(s_argv[0].s, "echo"))
+		return (builtin_echo(s_argv));
+	else if (ft_strequ(s_argv[0].s, "help"))
+		return (builtin_help());
 	return (0);
 }

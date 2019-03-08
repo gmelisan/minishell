@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   builtin_help.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 19:46:20 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/07 17:32:46 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/07 21:57:40 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/07 22:00:09 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int		builtin_help(void)
 {
-	size_t	i;
-
-	if (!s1 || !s2)
-		return (s1 == s2 ? 1 : 0);
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] != s2[i])
-		return (0);
-	return (1);
+	ft_printf("minishell, by gmelisan\n");
+	return (0);
 }

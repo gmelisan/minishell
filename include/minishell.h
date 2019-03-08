@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:07:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 20:38:31 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/07 22:00:30 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 enum	e_err
 {
-	ERROR_MALLOC = 10,
+	ERROR_MALLOC = 42,
 	ERROR_GNL,
 	ERROR_BADSYN,
 	ERROR_EXEC,
@@ -43,10 +43,13 @@ enum	e_err
 	ERROR_CD,
 	ERROR_PWD,
 	ERROR_ENV,
-	ERROR_NODIR,
+	ERROR_NOSUCHFOD,
+	ERROR_NOXRIGHT,
 	ERROR_CDFILE,
 	ERROR_SETENVDIGIT,
-	ERROR_SETENVALNUM
+	ERROR_SETENVALNUM,
+	ERROR_NOCOMMAND,
+	ERROR_CMDDIR
 };
 
 void	error_nofile(char *file);
@@ -70,10 +73,15 @@ int		builtin_pwd(void);
 int		builtin_env(t_string *s_env);
 int		builtin_setenv(t_string *s_argv, t_string **ps_env);
 int		builtin_unsetenv(t_string *s_argv, t_string **ps_env);
+int		builtin_echo(t_string *s_argv);
+int		builtin_help(void);
 
 int		get_env(t_string **ps_env);
 int		env_getval(t_string *s_env, char *name, t_string *value);
 int		env_setval(t_string **ps_env, char *name, t_string value);
 int		env_del(t_string **ps_env, char *name);
+
+t_string	*split_path(t_string str);
+int		is_dir(struct stat st);
 
 #endif

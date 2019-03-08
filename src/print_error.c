@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:31:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 21:22:42 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/07 21:14:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@ static void		print_error2(int e)
 {
 	if (e == ERROR_CD)
 		ft_fdprintf(STDERR, "%s\n", "Changing directory error");
-	else if (e == ERROR_NODIR)
+	else if (e == ERROR_NOSUCHFOD)
 		ft_fdprintf(STDERR, "%s\n", "No such file or directory");
 	else if (e == ERROR_CDFILE)
 		ft_fdprintf(STDERR, "%s\n", "Not a directory");
+	else if (e == ERROR_NOXRIGHT)
+		ft_fdprintf(STDERR, "%s\n", "Permission denied");
+	else if (e == ERROR_NOCOMMAND)
+		ft_fdprintf(STDERR, "%s\n", "Command not found");
+	else if (e == ERROR_CMDDIR)
+		ft_fdprintf(STDERR, "%s\n", "Is directory");
 	else if (e == ERROR_SETENVDIGIT)
 		ft_fdprintf(STDERR, "setenv: %s\n",
 					"Variable name must begin with a letter");

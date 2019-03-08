@@ -6,18 +6,11 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:58:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 21:23:04 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:08:42 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_dir(struct stat st)
-{
-	if ((st.st_mode & S_IFMT) == S_IFDIR)
-		return (1);
-	return (0);
-}
 
 static int	cwd(t_string *str)
 {
@@ -39,9 +32,11 @@ static int	change_dir(t_string path, t_string **ps_env)
 	int			ret;
 
 	if (stat(path.s, &st) == -1)
-		return (ERROR_NODIR);
+		return (ERROR_NOSUCHFOD);
 	if (!is_dir(st))
 		return (ERROR_CDFILE);
+	if (access(path.s, X_OK) != 0)
+		return (ERROR_NOXRIGHT);
 	if ((ret = cwd(&curpath)))
 		return (ret);
 	if ((ret = env_setval(ps_env, "OLDPWD", curpath)))
