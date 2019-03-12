@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 04:59:40 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/12 20:43:31 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 20:54:36 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ int		handle_dollar(t_string line, int *i, t_string *word,
 	t_string	var;
 	t_string	value;
 
+	if (!ft_isalnum(str_get(line, *i + 1)))
+		return (handle_common(line, i, word));
 	*i += 1;
-	if (!ft_isalnum(str_get(line, *i)))
-		return (str_addback(word, &line.s[*i - 1], 1) == NULL ?
-				ERROR_MALLOC : 0);
 	str_zero(&var);
 	while (ft_isalnum(str_get(line, *i)))
 	{
