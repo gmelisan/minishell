@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 07:21:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/12 02:42:38 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 20:17:07 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			exec_line(t_string line, t_string **ps_env, int *exit_flag)
 		else if ((ret = check_command(s_argv, *ps_env)) == 0)
 			ret = exec_command_wrapper(s_argv, *ps_env);
 		str_delarr(&s_argv);
-		if (ret)
+		if (ret && !*exit_flag)
 			print_error(ret);
 	}
 	return (ret);

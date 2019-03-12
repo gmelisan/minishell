@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 05:58:45 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/12 05:26:34 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/12 20:12:45 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,8 +15,7 @@ NAME = minishell
 LIBFT = ./libft
 
 CC = @clang
-CFLAGS = -Wall -Wextra -g
-#CFLAGS += -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ = $(addprefix ./src/, \
 main.o print_error.o main_loop.o exec_line.o exec_command_wrapper.o \

@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:51:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/12 07:46:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 19:28:09 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				main_loop(int fd, t_string **ps_env)
 		}
 		if (exit_flag)
 			ft_printf("\n");
-		if ((ret = exec_line(line, ps_env, &exit_flag)))
+		if ((ret = exec_line(line, ps_env, &exit_flag)) && !exit_flag)
 			print_error(ret);
 		str_delete(&line);
 	}

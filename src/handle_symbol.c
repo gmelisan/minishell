@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 04:59:40 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/12 08:51:29 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 18:34:39 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		handle_tilda(t_string line, int *i, t_string *word, t_string *s_env)
 	*i += 1;
 	return (0);
 }
+
 int		handle_dquote(int *i, int dquote)
 {
 	*i += 1;

@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:38:13 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/12 08:51:37 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 18:34:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	get_word(t_string line, int *i, t_string *word, t_string *s_env)
 	if (str_get(line, *i) == '~' && (ret = handle_tilda(line, i, word, s_env)))
 		return (ret);
 	while (!is_endsymbol(str_get(line, *i)) &&
-		   (dquote || !ft_isspace(str_get(line, *i))))
+			(dquote || !ft_isspace(str_get(line, *i))))
 	{
 		if (str_get(line, *i) == '"')
 			dquote = handle_dquote(i, dquote);
