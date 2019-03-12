@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:47:32 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/04 14:14:02 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/11 03:34:58 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,6 @@ int			get_next_line(const int fd, char **line)
 	ft_lstadd(&buflist, ft_lstnew(NULL, 0));
 	buflist->content = gnlbuf;
 	if (!(ret = handle_buf(gnlbuf->buf, gnlbuf->fd, line)))
-		ft_lstremove(&buflist, i);
+		ft_lstremove(&buflist, i ? i : buflist);
 	return (ret);
 }

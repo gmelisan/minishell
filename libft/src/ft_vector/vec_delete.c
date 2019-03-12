@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_create.c                                       :+:      :+:    :+:   */
+/*   vec_delete.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/08 16:57:43 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/11 00:18:39 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/10 18:09:23 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/10 18:47:56 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 
-t_vector	vec_create(size_t len, size_t size)
+void	vec_delete(t_vector *vec, void (*del)(void *))
 {
-	t_vector	vec;
-	size_t		bytelen;
+	int i;
 
-	vec.alloc = VEC_DEFBUFSIZE;
-	vec.size = size;
-	bytelen = len * size;
-	while (vec.alloc <= bytelen)
-		vec.alloc *= 2;
-	vec.v = ft_memalloc(vec.alloc);
-	if (!vec.v)
-		vec_zero(&vec);
-	else
-		vec.len = len;
-	return (vec);
+	if (vec->alloc > 0)
+	{
+		i = 0;
+		while ((size_t)i < vec->len)
+		{
+			del(vec_get(*vec, i));
+			i++;
+		}
+		ft_memdel((void **)&vec->v);
+	}
+	vec_zero(vec);
 }

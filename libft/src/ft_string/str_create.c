@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 21:33:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/08 18:25:47 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/11 01:37:42 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ t_string		str_create(size_t len)
 		str.alloc *= 2;
 	str.s = ft_memalloc(str.alloc);
 	if (!str.s)
-	{
-		str.len = 0;
-		str.alloc = 0;
-	}
+		str_zero(&str);
 	else
 		str.len = len;
 	return (str);

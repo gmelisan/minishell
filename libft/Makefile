@@ -6,7 +6,7 @@
 #    By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 12:48:23 by gmelisan          #+#    #+#              #
-#    Updated: 2019/03/05 17:12:55 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/03/11 03:20:04 by gmelisan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS += -g
 
 OBJ = $(sort $(addprefix ./src/, \
 ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
@@ -49,11 +50,15 @@ OBJ_FTSTRING = $(sort $(addprefix ./src/ft_string/, \
 str_create.o str_copy.o str_delete.o str_delete.o \
 str_fixlen.o str_get.o str_compare.o str_duplicate.o \
 str_substring.o str_addfront.o str_addback.o str_split.o \
-str_delarr.o))
+str_delarr.o str_zero.o))
+
+OBJ_FTVECTOR = $(sort $(addprefix ./src/ft_vector/, \
+vec_create.o vec_duplicate.o vec_zero.o vec_delete.o vec_get.o \
+vec_addback.o vec_addfront.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJ_FTPRINTF) $(OBJ_FTSTRING)
+$(NAME): $(OBJ) $(OBJ_FTPRINTF) $(OBJ_FTSTRING) $(OBJ_FTVECTOR)
 	@ar rc $@ $^
 	@ranlib $@
 	@echo "\033[0;32mFile $@ was successfully created.\033[0m"
@@ -64,6 +69,7 @@ ft_qsort.o: ./include/ft_qsort.h
 
 $(OBJ_FTPRINTF): ./include/ft_printf.h ./include/libft.h
 $(OBJ_FTSTRING): ./include/ft_string.h ./include/libft.h
+$(OBJ_FTVECTOR): ./include/ft_vector.h ./include/libft.h
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -I./include -c -o $@ $<

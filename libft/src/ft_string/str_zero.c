@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_create.c                                       :+:      :+:    :+:   */
+/*   str_zero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/08 16:57:43 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/11 00:18:39 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/11 01:27:43 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/11 01:36:59 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
+#include "ft_string.h"
 
-t_vector	vec_create(size_t len, size_t size)
+void	str_zero(t_string *str)
 {
-	t_vector	vec;
-	size_t		bytelen;
-
-	vec.alloc = VEC_DEFBUFSIZE;
-	vec.size = size;
-	bytelen = len * size;
-	while (vec.alloc <= bytelen)
-		vec.alloc *= 2;
-	vec.v = ft_memalloc(vec.alloc);
-	if (!vec.v)
-		vec_zero(&vec);
-	else
-		vec.len = len;
-	return (vec);
+	str->s = NULL;
+	str->len = 0;
+	str->alloc = 0;
 }

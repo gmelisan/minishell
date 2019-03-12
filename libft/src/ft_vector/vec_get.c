@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_create.c                                       :+:      :+:    :+:   */
+/*   vec_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/08 16:57:43 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/11 00:18:39 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/03/10 18:11:49 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/03/10 18:52:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 
-t_vector	vec_create(size_t len, size_t size)
+void	*vec_get(t_vector vec, int i)
 {
-	t_vector	vec;
-	size_t		bytelen;
-
-	vec.alloc = VEC_DEFBUFSIZE;
-	vec.size = size;
-	bytelen = len * size;
-	while (vec.alloc <= bytelen)
-		vec.alloc *= 2;
-	vec.v = ft_memalloc(vec.alloc);
-	if (!vec.v)
-		vec_zero(&vec);
-	else
-		vec.len = len;
-	return (vec);
+	if (i < 0)
+		return (0);
+	if ((size_t)i < vec.len)
+		return ((void *)((t_uchar *)vec.v + (i * vec.size)));
+	return (0);
 }
