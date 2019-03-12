@@ -6,16 +6,19 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 06:51:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/08 01:09:23 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 07:46:03 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		show_prompt(int fd)
+static void		sighandler(int sig)
 {
-	if (fd == STDIN)
-		ft_printf("{red}$>{eoc} ");
+	if (sig == SIGINT)
+	{
+		ft_putchar('\n');
+		show_prompt(g_fd, *g_env);
+	}
 }
 
 int				main_loop(int fd, t_string **ps_env)
@@ -25,21 +28,19 @@ int				main_loop(int fd, t_string **ps_env)
 	int			exit_flag;
 
 	exit_flag = 0;
+	g_env = ps_env;
 	while (!exit_flag)
 	{
-		show_prompt(fd);
-		if ((ret = get_next_line(fd, &line.s)) == -1)
+		signal(SIGINT, sighandler);
+		show_prompt(fd, *ps_env);
+		if ((ret = get_input(fd, &line, &exit_flag)))
 		{
-			print_error(ERROR_GNL);
-			continue ;
-		}
-		else if (ret == 0)
-		{
-			ft_printf("\n");
+			print_error(ret);
 			break ;
 		}
-		str_fixlen(&line);
-		if ((ret = exec_line(line, ps_env, &exit_flag)) != 0 && !exit_flag)
+		if (exit_flag)
+			ft_printf("\n");
+		if ((ret = exec_line(line, ps_env, &exit_flag)))
 			print_error(ret);
 		str_delete(&line);
 	}

@@ -6,11 +6,19 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 19:16:03 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/08 19:30:57 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 06:42:21 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	sighandler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putchar('\n');
+	}
+}
 
 static int	exec_command(char **argv, char **envp)
 {
@@ -18,6 +26,7 @@ static int	exec_command(char **argv, char **envp)
 	int		status;
 
 	pid = fork();
+	signal(SIGINT, sighandler);
 	if (pid == 0)
 	{
 		if (execve(argv[0], argv, envp) == -1)

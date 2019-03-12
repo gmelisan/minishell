@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:31:33 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/07 21:14:19 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 09:13:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void			error_nofile(char *file)
 
 static void		print_error2(int e)
 {
-	if (e == ERROR_CD)
-		ft_fdprintf(STDERR, "%s\n", "Changing directory error");
-	else if (e == ERROR_NOSUCHFOD)
+	if (e == ERROR_NOSUCHFOD)
 		ft_fdprintf(STDERR, "%s\n", "No such file or directory");
 	else if (e == ERROR_CDFILE)
 		ft_fdprintf(STDERR, "%s\n", "Not a directory");
@@ -31,7 +29,7 @@ static void		print_error2(int e)
 	else if (e == ERROR_NOCOMMAND)
 		ft_fdprintf(STDERR, "%s\n", "Command not found");
 	else if (e == ERROR_CMDDIR)
-		ft_fdprintf(STDERR, "%s\n", "Is directory");
+		ft_fdprintf(STDERR, "%s\n", "Is a directory");
 	else if (e == ERROR_SETENVDIGIT)
 		ft_fdprintf(STDERR, "setenv: %s\n",
 					"Variable name must begin with a letter");
@@ -48,19 +46,21 @@ void			print_error(int e)
 		return ;
 	if (e == ERROR_MALLOC)
 		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Allocating memory error");
-	else if (e == ERROR_GNL)
+	else if (e == ERROR_READ)
 		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Input reading errror");
-	else if (e == ERROR_BADSYN)
-		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Syntax error");
+	else if (e == ERROR_BADQUOTE)
+		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Bad quoting");
 	else if (e == ERROR_EXEC)
 		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Executing error");
 	else if (e == ERROR_FORK)
 		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Forking error");
 	else if (e == ERROR_WAIT)
 		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME, "Waiting error");
-	else if (e == ERROR_PWD)
-		ft_fdprintf(STDERR, "%s: %s\n", SHELL_NAME,
-					"Error while printing working directory");
+	else if (e == ERROR_CHDIR)
+		ft_fdprintf(STDERR, "%s\n", "Changing directory error");
+	else if (e == ERROR_GETCWD)
+		ft_fdprintf(STDERR, "%s\n",
+					"Error while getting current working directory");
 	else
 		print_error2(e);
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 15:15:01 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/06 21:20:43 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 04:02:37 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		builtin_pwd(void)
 
 	ft_bzero(buf, CWD_BUFSIZE);
 	if (!(getcwd(buf, CWD_BUFSIZE - 1)))
-		return (ERROR_PWD);
+		return (ERROR_GETCWD);
 	ft_printf("%s\n", buf);
 	return (0);
 }

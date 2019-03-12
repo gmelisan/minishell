@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:58:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/07 20:08:42 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 04:05:22 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	cwd(t_string *str)
 
 	ft_bzero(buf, CWD_BUFSIZE);
 	if (!(getcwd(buf, CWD_BUFSIZE - 1)))
-		return (ERROR_PWD);
+		return (ERROR_GETCWD);
 	*str = str_copy(buf);
 	if (!(*str).s)
 		return (ERROR_MALLOC);
@@ -43,7 +43,7 @@ static int	change_dir(t_string path, t_string **ps_env)
 		return (ret);
 	str_delete(&curpath);
 	if (chdir(path.s) == -1)
-		return (ERROR_CD);
+		return (ERROR_CHDIR);
 	if ((ret = cwd(&curpath)))
 		return (ret);
 	if ((ret = env_setval(ps_env, "PWD", curpath)))

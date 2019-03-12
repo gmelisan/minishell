@@ -6,11 +6,21 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 17:53:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/03/08 00:59:25 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/03/12 08:32:30 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_directory(char *path)
+{
+	struct stat st;
+
+	stat(path, &st);
+	if (is_dir(st))
+		return (1);
+	return (0);
+}
 
 static int	find_file(t_string *pathes, t_string name, t_string *found)
 {
@@ -29,7 +39,7 @@ static int	find_file(t_string *pathes, t_string name, t_string *found)
 		if (str_addfront(&abspath, pathes[i].len ? pathes[i].s : ".",
 									pathes[i].len ? pathes[i].len : 1) == NULL)
 			return (ERROR_MALLOC);
-		if (access(abspath.s, F_OK) == 0)
+		if (access(abspath.s, F_OK) == 0 && !is_directory(abspath.s))
 		{
 			*found = abspath;
 			return (0);
@@ -47,7 +57,7 @@ static	int	noslash(t_string *s_argv, t_string *s_env)
 
 	if ((ret = env_getval(s_env, "PATH", &path)))
 		return (ret);
-	if (!(pathes = split_path(path)))
+	if ((ret = split_path(path, &pathes)))
 		return (ERROR_MALLOC);
 	str_delete(&path);
 	if ((ret = find_file(pathes, s_argv[0], &path)))
